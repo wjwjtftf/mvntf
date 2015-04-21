@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:tns="http://www.tangfan.org/user" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="UserService"
+	targetNamespace="http://www.tangfan.org/user">
+
+	<!-- ~ wrappered方式的wsdl,最常用的方式 ~ 特点: ~ 消息流中的part的名称都是parameters -->
+	<wsdl:types>
+		<xsd:schema targetNamespace="http://www.tangfan.org/user">
+			<!-- <xsd:import schemaLocation="user.xsd" namespace="http://www.tangfan.org/user"></xsd:import> -->
+			<!-- <xsd:include schemaLocation="user.xsd"></xsd:include> -->
+
+			<xsd:element name="add" type="tns:add"></xsd:element>
+			<xsd:element name="addResponse" type="tns:addResponse"></xsd:element>
+			<xsd:element name="delete" type="tns:delete"></xsd:element>
+			<xsd:element name="deleteResponse" type="tns:deleteResponse"></xsd:element>
+			<xsd:element name="list" type="tns:list"></xsd:element>
+			<xsd:element name="listResponse" type="tns:listResponse"></xsd:element>
+			<xsd:element name="login" type="tns:login"></xsd:element>
+			<xsd:element name="loginResponse" type="tns:loginResponse"></xsd:element>
+			
+			<xsd:element name="UserException" type="tns:userException"></xsd:element>
+			
+			<xsd:complexType name="add">
+				<xsd:sequence>
+					<xsd:element name="user" type="tns:user"></xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="addResponse">
+				<xsd:sequence />
+			</xsd:complexType>
+
+			<xsd:complexType name="delete">
+				<xsd:sequence>
+					<xsd:element name="username" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="deleteResponse">
+				<xsd:sequence />
+			</xsd:complexType>
+
+			<xsd:complexType name="list">
+				<xsd:sequence/>
+			</xsd:complexType>
+			<xsd:complexType name="listResponse">
+				<xsd:sequence minOccurs="1" maxOccurs="unbounded">
+					<xsd:element name="user" type="tns:user"/>
+				</xsd:sequence>
+			</xsd:complexType>
+			
+			<xsd:complexType name="login">
+				<xsd:sequence>
+					<xsd:element name="username" type="xsd:string" />
+					<xsd:element name="password" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="loginResponse">
+				<xsd:sequence>
+					<xsd:element name="user" type="tns:user" />
+				</xsd:sequence>
+			</xsd:complexType>
+
+			<xsd:complexType name="user">
+				<xsd:sequence>
+					<xsd:element name="id" type="xsd:int" />
+					<xsd:element name="username" type="xsd:string" />
+					<xsd:element name="password" type="xsd:string" />
+					<xsd:element name="nickname" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:complexType>
+			
+			<xsd:complexType name="userException">
+				<xsd:sequence>
+					<xsd:element name="message" type="xsd:string"/>
+				</xsd:sequence>
+			</xsd:complexType>
+			
+		</xsd:schema>
+	</wsdl:types>
+
+	<wsdl:message name="add">
+		<wsdl:part element="tns:add" name="parameters" />
+	</wsdl:message>
+	<wsdl:message name="addResponse">
+		<wsdl:part element="tns:addResponse" name="parameters" />
+	</wsdl:message>
+	<wsdl:message name="delete">
+		<wsdl:part element="tns:delete" name="parameters" />
+	</wsdl:message>
+	<wsdl:message name="deleteResponse">
+		<wsdl:part element="tns:deleteResponse" name="parameters" />
+	</wsdl:message>
+	<wsdl:message name="list">
+		<wsdl:part name="parameters" element="tns:list"/>
+	</wsdl:message>
+	<wsdl:message name="listResponse">
+		<wsdl:part name="parameters" element="tns:listResponse"/>
+	</wsdl:message>
+	<wsdl:message name="login">
+		<wsdl:part element="tns:login" name="parameters" />
+	</wsdl:message>
+	<wsdl:message name="loginResponse">
+		<wsdl:part element="tns:loginResponse" name="parameters" />
+	</wsdl:message>
+	<wsdl:message name="userException">
+		<wsdl:part name="fault" element="tns:UserException"></wsdl:part>
+	</wsdl:message>
+
+	<wsdl:portType name="userService">
+		<wsdl:operation name="add">
+			<wsdl:input message="tns:add" />
+			<wsdl:output message="tns:addResponse" />
+			<wsdl:fault name="userException" message="tns:userException"/>
+		</wsdl:operation>
+		<wsdl:operation name="delete">
+			<wsdl:input message="tns:delete" />
+			<wsdl:output message="tns:deleteResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="list">
+			<wsdl:input message="tns:list" />
+			<wsdl:output message="tns:listResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="login">
+			<wsdl:input message="tns:login" />
+			<wsdl:output message="tns:loginResponse" />
+			<wsdl:fault name="userException" message="tns:userException"/>
+		</wsdl:operation>
+	</wsdl:portType>
+
+	<wsdl:binding name="userServiceSOAP" type="tns:userService">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="add">
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="userException">
+				<soap:fault name="userException" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="delete">
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="list">
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="login">
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+			<wsdl:fault name="userException">
+				<soap:fault name="userException" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+	</wsdl:binding>
+
+	<wsdl:service name="UserService">
+		<wsdl:port binding="tns:userServiceSOAP" name="UserServicePort">
+			<soap:address location="http://localhost:8085/us" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>
