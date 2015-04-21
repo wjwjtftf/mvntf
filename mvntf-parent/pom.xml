@@ -1,0 +1,223 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion><!-- 当前POM模型的版本 -->
+
+	<groupId>org.study.mvntf</groupId><!-- 定义项目所在组，公司类型+公司组织+实际项目[通常是域名的反写] -->
+	<artifactId>mvntf-parent</artifactId><!-- 定义当前项目在实际项目中的模块，实际项目+模块[中间‘-’连接] -->
+	<version>0.0.1-SNAPSHOT</version><!-- 当前项目的当前版本,SNAPSHOT表示不稳定版本 -->
+	<packaging>pom</packaging><!-- 作为父模块或者聚合模块的POM,其打包类型也必须为POM,因为本身不包含除了POM文件之外的项目文件 -->
+
+	<name>mvntf-parent</name><!-- 为每个POM声明一个对于用户更为友好的名称，非必须 -->
+	<description>我的项目基础父pom</description><!-- 这里是项目描述，非必须 -->
+	<url>http://maven.apache.org</url><!-- 这里一般放站点文档的路径，非必须 -->
+
+	<!-- 配置全局变量 -->
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<springframework.version>3.2.0.RELEASE</springframework.version>
+		<junit.version>4.7</junit.version>
+		<jdk.version>1.7</jdk.version>
+	</properties>
+
+	<!-- 依赖库管理,约束子模块dependencies下元素的引用,不会给自身或子模块引入依赖 -->
+	<dependencyManagement>
+		<!-- ~ 在dependencyManagement下，scope可以选择import，import范围依赖由于 ~ 其特殊性，一般都是指向打包类型为POM的模块 -->
+		<dependencies>
+			<!-- 单元测试框架 -->
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>${junit.version}</version>
+				<scope>test</scope><!-- 依赖范围,默认compile说明该依赖对主代码和测试代码都生效 -->
+			</dependency>
+
+			<!-- jetty的servlet-api -->
+			<dependency>
+				<groupId>org.mortbay.jetty</groupId>
+				<artifactId>servlet-api</artifactId>
+				<version>3.0.20100224</version>
+				<scope>provided</scope>
+			</dependency>
+
+			<!-- jaxws-ri reference implemenets start -->
+			<dependency>
+				<groupId>javax.xml.ws</groupId>
+				<artifactId>jaxws-api</artifactId>
+				<version>2.2.8</version>
+				<type>jar</type>
+				<scope>compile</scope>
+			</dependency>
+			<dependency>
+				<groupId>com.sun.xml.ws</groupId>
+				<artifactId>jaxws-rt</artifactId>
+				<version>2.2.6-2</version>
+				<type>jar</type>
+				<scope>compile</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.glassfish.gmbal</groupId>
+				<artifactId>gmbal-api-only</artifactId>
+				<version>3.2.0-b003</version>
+				<type>jar</type>
+				<scope>compile</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.glassfish.external</groupId>
+				<artifactId>management-api</artifactId>
+				<version>3.1.0-b001</version>
+				<type>jar</type>
+				<scope>compile</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.jvnet.staxex</groupId>
+				<artifactId>stax-ex</artifactId>
+				<version>1.7</version>
+				<type>jar</type>
+				<scope>compile</scope>
+			</dependency>
+			<dependency>
+				<groupId>com.sun.xml.stream.buffer</groupId>
+				<artifactId>streambuffer</artifactId>
+				<version>1.5</version>
+				<type>jar</type>
+				<scope>compile</scope>
+			</dependency>
+			<dependency>
+				<groupId>com.sun.xml.ws</groupId>
+				<artifactId>policy</artifactId>
+				<version>2.3.1</version>
+				<type>jar</type>
+				<scope>compile</scope>
+			</dependency>
+			<dependency>
+				<groupId>com.sun.xml.bind</groupId>
+				<artifactId>jaxb-impl</artifactId>
+				<version>2.2.5</version>
+				<type>jar</type>
+				<scope>compile</scope>
+			</dependency>
+			<!-- jaxws-ri reference implemenets end -->
+			
+			<!-- spring framework start -->
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-core</artifactId>
+				<version>${springframework.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-beans</artifactId>
+				<version>${springframework.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-context</artifactId>
+				<version>${springframework.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-context-support</artifactId>
+				<version>${springframework.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-web</artifactId>
+				<version>${springframework.version}</version>
+			</dependency>
+			<!-- spring framework end -->
+		</dependencies>
+	</dependencyManagement>
+
+	<build>
+		<!-- 自定义绑定插件 -->
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>2.4</version>
+				<executions>
+					<!-- 配置插件下的任务,将目标绑定到阶段上,一个阶段可以绑定多个目标 -->
+					<execution>
+						<id>attach-sources</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>jar-no-fork</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+		<!-- 插件配置元素pluginManagement,不会影响实际的行为,可以统一项目插件版本,更易于维护 -->
+		<pluginManagement>
+			<plugins>
+				<!-- 约束编译器版本 -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>2.5.1</version>
+					<configuration>
+						<source>${jdk.version}</source>
+						<target>${jdk.version}</target>
+					</configuration>
+				</plugin>
+				<!-- 使用UTF-8编码处理资源文件 -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-resources-plugin</artifactId>
+					<version>2.6</version>
+					<configuration>
+						<encoding>UTF-8</encoding>
+					</configuration>
+				</plugin>
+				<!-- jetty容器插件 -->
+				<plugin>
+					<groupId>org.mortbay.jetty</groupId>
+					<artifactId>jetty-maven-plugin</artifactId>
+					<version>8.1.16.v20140903</version>
+					<configuration>
+						<scanIntervalSeconds>4</scanIntervalSeconds>
+						<connectors>
+							<connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
+								<port>8085</port>
+								<maxIdleTime>60000</maxIdleTime>
+							</connector>
+						</connectors>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+
+	<!-- 配置部署仓库 -->
+	<distributionManagement>
+		<!-- 发行版本部署仓库 -->
+		<repository>
+			<id>my-releases-nexus</id>
+			<name>Project Release Repository</name>
+			<url>http://D75GCZVKTF2BS5W:8081/nexus/content/repositories/account-releases</url>
+		</repository>
+		<!-- 快照版本部署仓库 -->
+		<snapshotRepository>
+			<id>my-snaphosts-nexus</id>
+			<name>Project Snaphost Repository</name>
+			<url>http://D75GCZVKTF2BS5W:8081/nexus/content/repositories/account-snapshots</url>
+		</snapshotRepository>
+	</distributionManagement>
+
+	<!-- 开发年份 -->
+	<inceptionYear>2014</inceptionYear>
+	
+	<!-- 开发者信息 -->
+	<developers>
+		<developer>
+			<id>wjwjtftf</id>
+			<name>tangfan</name>
+			<organization>org</organization>
+			<roles>
+				<role>programmer</role>
+				<role>man</role>
+				<role>student</role>
+			</roles>
+		</developer>
+	</developers>
+</project>
