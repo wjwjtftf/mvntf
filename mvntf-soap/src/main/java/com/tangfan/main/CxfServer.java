@@ -1,14 +1,16 @@
 /*******************************************************************
- * Copyright (c) 2013 tangfan and others
- * All rights reserved.
+ * copyright 2015 TangFan and others
  *
  * Contributors:
- * tangfan's Systems (Shanghai) fan.T, Ltd.
+ * all programmers predecessors
  * 
  ******************************************************************/
 package com.tangfan.main;
 
-import javax.xml.ws.Endpoint;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.xml.ws.handler.Handler;
 
 import org.apache.cxf.interceptor.LoggingInInterceptor;
 import org.apache.cxf.interceptor.LoggingOutInterceptor;
@@ -16,6 +18,7 @@ import org.apache.cxf.jaxws.JaxWsServerFactoryBean;
 
 import com.tangfan.cxf.service.CxfService;
 import com.tangfan.cxf.service.impl.CxfServiceImpl;
+import com.tangfan.soap.handler.CxfServerHandler;
 
 /**
  * CxfServiceImpl服务的发布
@@ -32,19 +35,27 @@ public class CxfServer {
 	 * 
 	 * @param args
 	 */
+	@SuppressWarnings({"rawtypes" })
 	public static void main(String[] args) {
-		String address = "http://localhost:8084/cxf";
-//		Endpoint.publish(address, new CxfServiceImpl());
 		
 		/*
-		 * 另一种发布的方式
+		 * 通过CXF API发布服务
 		 */
+		String address = "http://localhost:8084/cxf";
 		JaxWsServerFactoryBean fac = new JaxWsServerFactoryBean();
 		fac.setAddress(address);
 		fac.setServiceBean(new CxfServiceImpl());
 		fac.setServiceClass(CxfService.class);
 		fac.getInInterceptors().add(new LoggingInInterceptor());
 		fac.getOutInterceptors().add(new LoggingOutInterceptor());
+		
+		/*
+		 * 添加handlers到服务端
+		 */
+		List<Handler> handlers = new ArrayList<Handler>();
+		handlers.add(new CxfServerHandler());
+		fac.setHandlers(handlers);
+		
 		fac.create();
 	}
 

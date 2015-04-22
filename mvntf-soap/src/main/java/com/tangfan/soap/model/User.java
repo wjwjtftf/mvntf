@@ -1,9 +1,8 @@
 /*******************************************************************
- * Copyright (c) 2013 tangfan and others
- * All rights reserved.
+ * copyright 2015 TangFan and others
  *
  * Contributors:
- * tangfan's Systems (Shanghai) fan.T, Ltd.
+ * all programmers predecessors
  * 
  ******************************************************************/
 package com.tangfan.soap.model;

@@ -1,9 +1,8 @@
 /*******************************************************************
- * Copyright (c) 2013 tangfan and others
- * All rights reserved.
+ * copyright 2015 TangFan and others
  *
  * Contributors:
- * tangfan's Systems (Shanghai) fan.T, Ltd.
+ * all programmers predecessors
  * 
  ******************************************************************/
 package com.tangfan.soap.service.impl;
@@ -23,7 +22,6 @@ import javax.xml.stream.XMLStreamReader;
 import javax.xml.stream.events.XMLEvent;
 import javax.xml.ws.BindingType;
 import javax.xml.ws.WebServiceContext;
-import javax.xml.ws.soap.MTOM;
 import javax.xml.ws.soap.SOAPBinding;
 
 import com.sun.xml.ws.api.message.Header;

@@ -1,9 +1,8 @@
 /*******************************************************************
- * Copyright (c) 2013 tangfan and others
- * All rights reserved.
+ * copyright 2015 TangFan and others
  *
  * Contributors:
- * tangfan's Systems (Shanghai) fan.T, Ltd.
+ * all programmers predecessors
  * 
  ******************************************************************/
 package com.tangfan.webproject.server;
@@ -26,16 +25,12 @@ public class StartServer {
 	public static final String	CONTEXT		= "/client";
 	public static final String	BASE_URL	= "http://localhost:8086/client/user.do";
 
-	// public static final String[] TLD_JAR_NAMES = new String[]
-	// {"sitemesh","struts2-core", "shiro-web","jstl"};
-
 	public static void main(String[] args) throws Exception {
 		// 设定Spring的profile
-		System.setProperty("spring.profiles.active", "development");
+//		System.setProperty("spring.profiles.active", "development");
 
 		// 启动Jetty
 		Server server = JettyFactory.createServerInSource(PORT, CONTEXT);
-		// JettyFactory.setTldJarNames(server, TLD_JAR_NAMES);
 
 		try {
 			server.start();

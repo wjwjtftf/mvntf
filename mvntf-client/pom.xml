@@ -112,6 +112,7 @@
 			</plugin>
 			<!-- cxf wsdl2java plugin start -->
 			<plugin>
+				<!-- org.apache.cxf:cxf-codegen-plugin:wsdl2java -->
 				<groupId>org.apache.cxf</groupId>
 				<artifactId>cxf-codegen-plugin</artifactId>
 				<version>${cxf.version}</version>

@@ -1,3 +1,10 @@
+/*******************************************************************
+ * copyright 2015 TangFan and others
+ *
+ * Contributors:
+ * all programmers predecessors
+ * 
+ ******************************************************************/
 package com.tangfan.servlet;
 
 import java.io.IOException;

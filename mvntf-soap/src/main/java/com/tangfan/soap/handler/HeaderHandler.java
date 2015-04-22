@@ -1,9 +1,8 @@
 /*******************************************************************
- * Copyright (c) 2007 arvato and others
- * All rights reserved.
+ * copyright 2015 TangFan and others
  *
  * Contributors:
- * arvato Systems (Shanghai) Co., Ltd.
+ * all programmers predecessors
  * 
  ******************************************************************/
 package com.tangfan.soap.handler;
