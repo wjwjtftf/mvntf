@@ -56,7 +56,7 @@ public class CxfServerHandler implements SOAPHandler<SOAPMessageContext> {
 				while (it.hasNext()) {
 					SOAPHeaderElement ele = it.next();
 					if(ele.getLocalName().equals("licenseInfo")){
-						System.out.println("服务器接受到licenseInfo:" + ele.getTextContent());
+						System.out.println("服务器接收到licenseInfo:" + ele.getTextContent());
 					}
 				}
 			}

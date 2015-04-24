@@ -16,6 +16,7 @@ import org.apache.cxf.interceptor.LoggingInInterceptor;
 import org.apache.cxf.interceptor.LoggingOutInterceptor;
 import org.apache.cxf.jaxws.JaxWsServerFactoryBean;
 
+import com.tangfan.cxf.interceptor.LicenseUserInInterceptor;
 import com.tangfan.cxf.service.CxfService;
 import com.tangfan.cxf.service.impl.CxfServiceImpl;
 import com.tangfan.soap.handler.CxfServerHandler;
@@ -35,7 +36,6 @@ public class CxfServer {
 	 * 
 	 * @param args
 	 */
-	@SuppressWarnings({"rawtypes" })
 	public static void main(String[] args) {
 		
 		/*
@@ -49,14 +49,29 @@ public class CxfServer {
 		fac.getInInterceptors().add(new LoggingInInterceptor());
 		fac.getOutInterceptors().add(new LoggingOutInterceptor());
 		
-		/*
-		 * 添加handlers到服务端
-		 */
+		startHandler(fac);
+		startInterceptor(fac);
+		
+		fac.create();
+	}
+	
+	/**
+	 * 添加handlers到服务端
+	 */
+	@SuppressWarnings("rawtypes")
+	public static void startHandler(JaxWsServerFactoryBean fac){
+		
 		List<Handler> handlers = new ArrayList<Handler>();
 		handlers.add(new CxfServerHandler());
 		fac.setHandlers(handlers);
+	}
+	
+	/**
+	 * 添加interceptor到服务端
+	 */
+	public static void startInterceptor(JaxWsServerFactoryBean fac){
 		
-		fac.create();
+		fac.getInInterceptors().add(new LicenseUserInInterceptor());
 	}
 
 }

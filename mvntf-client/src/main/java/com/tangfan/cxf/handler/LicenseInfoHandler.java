@@ -82,7 +82,7 @@ public class LicenseInfoHandler implements SOAPHandler<SOAPMessageContext> {
 					header = enve.addHeader();
 				}
 				QName qName = new QName("http://service.cxf.tangfan.com/", "licenseInfo");
-				header.addHeaderElement(qName).setValue("admin123");
+				header.addHeaderElement(qName).setValue("admin_handler");
 			}
 		} catch (SOAPException e) {
 			e.printStackTrace();
