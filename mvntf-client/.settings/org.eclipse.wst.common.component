@@ -9,6 +9,6 @@
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <property name="java-output-path" value="/mvntf-client/target/classes"/>
-        <property name="context-root" value="client.war"/>
+        <property name="context-root" value="client"/>
     </wb-module>
 </project-modules>

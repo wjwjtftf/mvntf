@@ -84,7 +84,7 @@ public class CxfServiceTest {
 	public void sayHelloUserInter() {
 
 		JaxWsProxyFactoryBean fac = new JaxWsProxyFactoryBean();
-		fac.setAddress("http://localhost:8084/cxf");
+		fac.setAddress("http://localhost:8085/soap/services/cxf");
 		fac.setServiceClass(CxfService.class);
 		fac.getInInterceptors().add(new LoggingInInterceptor());
 		fac.getOutInterceptors().add(new LoggingOutInterceptor());

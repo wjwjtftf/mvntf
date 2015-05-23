@@ -9,6 +9,8 @@ package com.tangfan.cxf.service.impl;
 
 import javax.jws.WebService;
 
+import org.apache.cxf.interceptor.InInterceptors;
+
 import com.tangfan.cxf.service.CxfService;
 
 /**
@@ -21,6 +23,7 @@ import com.tangfan.cxf.service.CxfService;
  */
 @WebService(endpointInterface="com.tangfan.cxf.service.CxfService",
 		targetNamespace="http://service.cxf.tangfan.com/")
+@InInterceptors(interceptors={"com.tangfan.cxf.interceptor.LicenseUserInInterceptor"})
 public class CxfServiceImpl implements CxfService {
 
 	/** 

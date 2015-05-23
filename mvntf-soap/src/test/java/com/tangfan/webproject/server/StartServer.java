@@ -23,7 +23,7 @@ import com.tangfan.test.jetty.JettyFactory;
 public class StartServer {
 	public static final int		PORT		= 8085;
 	public static final String	CONTEXT		= "/soap";
-	public static final String	BASE_URL	= "http://localhost:8085/soap/us";
+	public static final String	BASE_URL	= "http://localhost:8085/soap/services/";
 
 	// public static final String[] TLD_JAR_NAMES = new String[]
 	// {"sitemesh","struts2-core", "shiro-web","jstl"};
