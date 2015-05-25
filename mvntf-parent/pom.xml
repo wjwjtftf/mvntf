@@ -16,7 +16,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<springframework.version>3.2.0.RELEASE</springframework.version>
 		<junit.version>4.7</junit.version>
-		<jdk.version>1.8</jdk.version>
+		<java.compile.version>1.8</java.compile.version>
 	</properties>
 
 	<!-- 依赖库管理,约束子模块dependencies下元素的引用,不会给自身或子模块引入依赖 -->
@@ -159,10 +159,11 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-compiler-plugin</artifactId>
-					<version>2.5.1</version>
+					<version>3.2</version>
 					<configuration>
-						<source>${jdk.version}</source>
-						<target>${jdk.version}</target>
+						<source>${java.compile.version}</source>
+						<target>${java.compile.version}</target>
+						<encoding>${project.build.sourceEncoding}</encoding>
 					</configuration>
 				</plugin>
 				<!-- 使用UTF-8编码处理资源文件 -->
