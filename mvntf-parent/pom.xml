@@ -14,7 +14,7 @@
 	<!-- 配置全局变量 -->
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<springframework.version>3.2.0.RELEASE</springframework.version>
+		<springframework.version>4.1.6.RELEASE</springframework.version>
 		<junit.version>4.7</junit.version>
 		<java.compile.version>1.8</java.compile.version>
 	</properties>
@@ -139,7 +139,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
-				<version>2.4</version>
+				<!-- <version>2.4</version> -->
 				<executions>
 					<!-- 配置插件下的任务,将目标绑定到阶段上,一个阶段可以绑定多个目标 -->
 					<execution>
@@ -159,7 +159,7 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-compiler-plugin</artifactId>
-					<version>3.2</version>
+					<!-- <version>3.2</version> -->
 					<configuration>
 						<source>${java.compile.version}</source>
 						<target>${java.compile.version}</target>
